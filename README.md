@@ -27,6 +27,7 @@ We build on the MIMIC-IV and MIMIC-CXR datasets for our experiments. MedPatch is
 
 ![](Images/Medpatch.png)
 
+ (a) Summary of dataset splits. (b) Unimodal pretraining pipeline for each modality. (c) Overview of the joint module used in our architecture. (d) Overview of the MedPatch architecture highlighting all the components including the missingness module, the joint module and its two predictions, and the final prediction returned by the late module.
 
 Environment Setup
 ==================
