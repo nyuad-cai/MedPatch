@@ -85,6 +85,7 @@ pandocfilters==1.4.2
 parso==0.7.0
 partd==1.2.0
 pathtools==0.1.2
+patsy==1.0.1
 pexpect @ file:///home/conda/feedstock_root/build_artifacts/pexpect_1667297516076/work
 pickleshare @ file:///home/conda/feedstock_root/build_artifacts/pickleshare_1602536217715/work
 Pillow @ file:///tmp/build/80754af9/pillow_1602788709045/work
@@ -122,6 +123,7 @@ simplejson @ file:///tmp/build/80754af9/simplejson_1626446511555/work
 six @ file:///home/conda/feedstock_root/build_artifacts/six_1590081179328/work
 smmap @ file:///home/conda/feedstock_root/build_artifacts/smmap_1612632339838/work
 sortedcontainers==2.4.0
+statsmodels==0.12.2
 swagger-spec-validator @ file:///home/conda/feedstock_root/build_artifacts/swagger-spec-validator_1593189905517/work
 swifter==1.4.0
 tblib==1.7.0
