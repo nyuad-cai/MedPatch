@@ -1,4 +1,4 @@
-name: medfuse
+name: medpatch
 channels:
   - nvidia
   - anaconda
