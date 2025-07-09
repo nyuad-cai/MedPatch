@@ -259,4 +259,3 @@ dependencies:
       - wandb==0.15.2
       - warmup-scheduler==0.3
       - zict==2.1.0
-prefix: /home/baj321/.conda/envs/medfuse
