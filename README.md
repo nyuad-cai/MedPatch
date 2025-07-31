@@ -78,8 +78,10 @@ sh ./scripts/phenotyping/unimodal/EHR.sh
 sh ./scripts/phenotyping/unimodal/CXR.sh
 sh ./scripts/phenotyping/unimodal/RR.sh
 sh ./scripts/phenotyping/unimodal/DN.sh
+```
 
 ### Stage 2: Confidence Predictor Training
+```bash
 Update `load_ehr`, `load_cxr`, `load_rr`, `load_dn` with the best checkpoints from Uni-modal Encoder Pretraining.
 
 # in-hospital mortality Confidence Training - available for other modalities as well
@@ -92,10 +94,10 @@ sh ./scripts/phenotyping/Confidence/Confidence-EHR.sh
 # Also available for other modalities
 sh ./scripts/mortality/Calibrate/Calibrate-EHR.sh
 sh ./scripts/phenotyping/Calibrate/Calibrate-EHR.sh
-
-
+```
 
 ### Stage 3: MedPatch Fusion and Fine-Tuning
+```bash
 Update `load_ehr`, `load_cxr`, `load_rr`, `load_dn` with the best checkpoints from Confidence Pretraining.
 
 # MedPatch for in-hospital mortality
