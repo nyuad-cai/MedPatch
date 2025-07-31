@@ -70,13 +70,31 @@ We follow a two-stage training process.
 ```bash
 # Train Each unimodal encoder for mortality
 sh ./scripts/mortality/EHR.sh
+sh ./scripts/mortality/CXR.sh
+sh ./scripts/mortality/RR.sh
 
 # Train LSTM model on EHR data for phenotype task
 sh ./scripts/phenotyping/EHR.sh
+sh ./scripts/phenotyping/CXR.sh
+sh ./scripts/phenotyping/RR.sh
+sh ./scripts/phenotyping/DN.sh
 
-
-### Stage 2: MedPatch Fusion and Fine-Tuning
+### Stage 2: Confidence Predictor Training
 Update `load_ehr`, `load_cxr`, `load_rr`, `load_dn` with the best checkpoints from Uni-modal Encoder Pretraining.
+```bash
+# in-hospital mortality Confidence Training
+sh ./scripts/mortality/Confidence.sh
+
+# phenotyping Confidence Training
+sh ./scripts/phenotyping/Confidence.sh
+
+#Optional Post-Hoc Calibration
+sh ./scripts/mortality/Calibrate.sh
+sh ./scripts/phenotyping/Calibrate.sh
+
+
+### Stage 3: MedPatch Fusion and Fine-Tuning
+Update `load_ehr`, `load_cxr`, `load_rr`, `load_dn` with the best checkpoints from Confidence Pretraining.
 ```bash
 # MedPatch for in-hospital mortality
 sh ./scripts/mortality/medpatch.sh
@@ -95,7 +113,7 @@ Update `load_state` with the trained model path.
 sh ./scripts/mortality/evaluate.sh
 
 # Evaluate MedPatch for phenotype classification
-sh ./scripts/phenotyping/eval/evaluate.sh
+sh ./scripts/phenotyping/evaluate.sh
 ```
 
 Citation
