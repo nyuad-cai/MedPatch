@@ -64,50 +64,52 @@ Refer to `arguments.py` for full configuration options.
 
 Model Training
 -----------------
-We follow a two-stage training process.
+We follow a three-stage training process.
 
 ### Stage 1: Uni-modal Encoder Pretraining
 ```bash
 # Train Each unimodal encoder for mortality
-sh ./scripts/mortality/EHR.sh
-sh ./scripts/mortality/CXR.sh
-sh ./scripts/mortality/RR.sh
+sh ./scripts/mortality/unimodal/EHR.sh
+sh ./scripts/mortality/unimodal/CXR.sh
+sh ./scripts/mortality/unimodal/RR.sh
 
 # Train LSTM model on EHR data for phenotype task
-sh ./scripts/phenotyping/EHR.sh
-sh ./scripts/phenotyping/CXR.sh
-sh ./scripts/phenotyping/RR.sh
-sh ./scripts/phenotyping/DN.sh
+sh ./scripts/phenotyping/unimodal/EHR.sh
+sh ./scripts/phenotyping/unimodal/CXR.sh
+sh ./scripts/phenotyping/unimodal/RR.sh
+sh ./scripts/phenotyping/unimodal/DN.sh
 
 ### Stage 2: Confidence Predictor Training
 Update `load_ehr`, `load_cxr`, `load_rr`, `load_dn` with the best checkpoints from Uni-modal Encoder Pretraining.
-```bash
-# in-hospital mortality Confidence Training
-sh ./scripts/mortality/Confidence.sh
 
-# phenotyping Confidence Training
-sh ./scripts/phenotyping/Confidence.sh
+# in-hospital mortality Confidence Training - available for other modalities as well
+sh ./scripts/mortality/Confidence/Confidence-EHR.sh
+
+# phenotyping Confidence Training - available for other modalities as well
+sh ./scripts/phenotyping/Confidence/Confidence-EHR.sh
 
 #Optional Post-Hoc Calibration
-sh ./scripts/mortality/Calibrate.sh
-sh ./scripts/phenotyping/Calibrate.sh
+# Also available for other modalities
+sh ./scripts/mortality/Calibrate/Calibrate-EHR.sh
+sh ./scripts/phenotyping/Calibrate/Calibrate-EHR.sh
+
 
 
 ### Stage 3: MedPatch Fusion and Fine-Tuning
 Update `load_ehr`, `load_cxr`, `load_rr`, `load_dn` with the best checkpoints from Confidence Pretraining.
-```bash
+
 # MedPatch for in-hospital mortality
-sh ./scripts/mortality/medpatch.sh
+sh ./scripts/mortality/MedPatch/Confidence-Patching.sh
 
 # MedPatch for phenotype classification
-sh ./scripts/phenotyping/medpatch.sh
+sh ./scripts/phenotyping/MedPatch/Confidence-Patching.sh
 ```
 
 Training scripts for all baseline models are provided under `scripts/`. Learning rates were selected from 10 random samples in the range [0.00001, 0.001].
 
 Model Evaluation
 ------------------
-Update `load_state` with the trained model path.
+Update `load_state` with the trained model path. Change all other necessary parameters as desired.
 ```bash
 # Evaluate MedPatch for in-hospital mortality
 sh ./scripts/mortality/evaluate.sh
